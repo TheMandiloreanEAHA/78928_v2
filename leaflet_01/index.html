@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+ integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+ crossorigin=""></script>
+    <title>Leaflet MAP</title>
+    <style>
+        #map { height: 80vh; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>    
+        <label>Latitud</label>
+        <input id="latitud">
+        <label>Longitud</label>
+        <input id="longitud">
+        <label>Mensaje</label>
+        <input id="mensaje">
+        <button onclick="addPop()">Marcar</button>
+   
+    <script>
+        var map = L.map('map').setView([19.541576, -96.926570], 18);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        var marker = L.marker();
+
+        function addPop(){
+            map.removeLayer(marker);
+            var lat = document.getElementById("latitud").value;
+            var long = document.getElementById("longitud").value;
+            var msg = document.getElementById("mensaje").value;
+            marker = L.marker([lat, long],35,{ id: "markerID"}).addTo(map);
+            marker.bindPopup("<b>"+msg+"</b>").openPopup();
+            document.getElementById("latitud").value = "";
+            document.getElementById("longitud").value = "";
+            document.getElementById("mensaje").value = "";
+            
+        }
+
+        var popupCoordenadas = L.popup();
+
+        function onMapClick(e) {
+            popupCoordenadas
+            .setLatLng(e.latlng)
+            .setContent("Estás en las coordenadas: " + e.latlng.toString())
+            .openOn(map);
+}
+
+        map.on('click', onMapClick);
+    </script>
+
+</body>
+</html>

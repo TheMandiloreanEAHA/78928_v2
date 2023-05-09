@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mosquito Cliente</title>
+</head>
+<body>
+  <ul>
+    <li>
+      <label for="label_mensaje">Mensaje:</label>
+      <input type="text" id="mensaje" name="user_mensaje">
+    </li>
+  </ul>
+  <button onClick="sendMessage();">Enviar</button>
+  <p id="valueInput"></p>
+  <script src="index.js"></script>
+</body>
+</html>
+
+<!-- Ejecutar el servicio desde la terminal de VS
+    **Verificar que la ruta que se mapea (La inicial) sea donde se encuentra el mosquitto.conf
+    docker run -it --rm -p 1883:1883 -p 9001:9001 -v C:D:\Trabajos\Escuela\UV\6. Sexto Semestre\Tec Web\RepositorioGithub\78928\Practica Mosquitto\mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto 
+-->
